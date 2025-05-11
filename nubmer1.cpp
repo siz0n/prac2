@@ -68,7 +68,7 @@ int binary_exponentiation(int a, int x, int p) {
     }
 
 // --- Основная программа ---
-int main() {
+void exponentiationDemo() {
     int a, x, p;
 
     cout << "Введите a: ";
@@ -80,12 +80,12 @@ int main() {
 
     if (!is_prime(p)) {
         cerr << "Ошибка: p должно быть простым!\n";
-        return 1;
+        
     }
 
     if (gcd(a, p) != 1) {
         cerr << "Ошибка: a и p должны быть взаимно просты!\n";
-        return 1;
+        
     }
 
     int result_fermat = fermat_method(a, x, p);
@@ -96,10 +96,9 @@ int main() {
 
     if (result_fermat != result_binary) {
         cerr << "Ошибка: Алгоритмы дали разные результаты!\n";
-        return 1;
+        
     } else {
         cout << "Результаты совпадают!\n";
     }
 
-    return 0;
 }
