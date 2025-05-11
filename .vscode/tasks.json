@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "cppbuild",
+      "label": "Build Project",
+      "command": "/usr/bin/g++",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+        "${workspaceFolder}/main.cpp",
+        "${workspaceFolder}/number1.cpp",
+        "-o",
+        "${workspaceFolder}/program"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}
+

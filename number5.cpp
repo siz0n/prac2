@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include "number5.h"
 
 using namespace std;
 
@@ -34,10 +35,13 @@ tuple<int, int, int> extendedEuclid(int a, int b) {
     return X;
 }
 
-int main() {
+void uravnenie() {
     // Пример с цепной дробью
-    long long p = 17;
-    long long q = 5;
+    long long p;
+    long long q;
+    cin >> p;
+    cout << "/" << endl;
+    cin >> q;
     vector<long long> result = continuedFraction(p, q);
     cout << p << "/" << q << " в виде цепной дроби = [";
     for (size_t i = 0; i < result.size(); i++) {
@@ -69,5 +73,4 @@ int main() {
         cout << "где k — любое целое число." << endl;
     }
 
-    return 0;
 }

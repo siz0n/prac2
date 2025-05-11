@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include "number1.h"
 using namespace std;
 
 // --- 1. Проверка простоты числа ---
@@ -68,7 +69,7 @@ int binary_exponentiation(int a, int x, int p) {
     }
 
 // --- Основная программа ---
-void exponentiationDemo() {
+void exponentiation() {
     int a, x, p;
 
     cout << "Введите a: ";

@@ -1,9 +1,10 @@
 #include <iostream>
 #include <tuple> 
+#include "number3.h"
 using namespace std;
 
 
-tuple<int, int, int> eEuclid(int a, int b) {
+tuple<int, int, int> Euclid(int a, int b) {
     tuple<int, int, int> X = {a, 1, 0 } ;
     tuple<int, int, int> Y = {b, 0, 1};
 
@@ -22,18 +23,18 @@ tuple<int, int, int> eEuclid(int a, int b) {
     return X; 
 }
 
-int main() {
+void euclid() {
     int c, m;
     cout << "Введите число c: ";
     cin >> c;
     cout << "Введите модуль m: ";
     cin >> m;
 
-    auto [d, u, v] = eEuclid(c, m); 
+    auto [d, u, v] = Euclid(c, m); 
 
     if (d != 1) {
         cerr << "Обратного элемента не существует (НОД ≠ 1)" << endl;
-        return 1;
+        
     }
 
     // нужно положительно
@@ -43,5 +44,5 @@ int main() {
     cout << c << "^-1" << " " << " * " << " mod " << m 
          << " = " << inverse<< endl;
 
-    return 0;
+    
 }

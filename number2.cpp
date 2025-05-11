@@ -1,6 +1,6 @@
 #include <iostream>
 #include <tuple> 
-#include "nubmer2.h"
+#include "number2.h"
 using namespace std;
 
 
@@ -23,7 +23,7 @@ tuple<int, int, int> eEuclid(int a, int b) {
     return X; 
 }
 
-void extendedEuclidDemo() {
+void extendedEuclid() {
     int a, b;
     cout << "Введите число a: ";
     cin >> a;

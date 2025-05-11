@@ -2,7 +2,7 @@
 #include <string>
 #include <vector>
 #include <cmath>
-
+#include "number4.h"
 using namespace std;
 
 // Быстрое возведение в степень по модулю
@@ -19,7 +19,7 @@ long long pow_mod(long long a, long long b, long long p) {
 }
 
 // Функция шифрования
-vector<pair<long long, long long>> encrypt(const string& message, long long p, long long k, long long g, long long y) {
+vector<pair<long long, long long>> encrypt1(const string& message, long long p, long long k, long long g, long long y) {
     vector<pair<long long, long long>> encrypted;
     for (char c : message) {
         long long m = static_cast<long long>(static_cast<unsigned char>(c)); // Исправлено здесь
@@ -30,7 +30,7 @@ vector<pair<long long, long long>> encrypt(const string& message, long long p, l
     return encrypted;
 }
 // Функция дешифрования
-string decrypt(const vector<pair<long long, long long>>& encrypted, long long p, long long x) {
+string decrypt1(const vector<pair<long long, long long>>& encrypted, long long p, long long x) {
     string decrypted;
     for (const auto& pair : encrypted) {
         long long a = pair.first;
@@ -43,7 +43,7 @@ string decrypt(const vector<pair<long long, long long>>& encrypted, long long p,
     return decrypted;
 }
 
-int main() {
+void shifr() {
     long long p, k, g, x;
     
     // Ввод параметров
@@ -69,7 +69,7 @@ int main() {
     getline(cin, message);
     
     // Шифрование
-    auto encrypted = encrypt(message, p, k, g, y);
+    auto encrypted = encrypt1(message, p, k, g, y);
     
     // Вывод зашифрованных данных
     cout << "\nЗашифрованное сообщение:\n";
@@ -79,10 +79,9 @@ int main() {
     
     
     // Дешифрование
-    string decrypted = decrypt(encrypted, p, x);
+    string decrypted = decrypt1(encrypted, p, x);
     
     // Вывод результатов
     cout << "\nРасшифрованное сообщение: " << decrypted << endl;
     
-    return 0;
 }

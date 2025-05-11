@@ -2,10 +2,11 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include "number6.h"
 
 using namespace std;
 
-long long pow_mod(long long a, long long b, long long p) {
+long long pow_mod1(long long a, long long b, long long p) {
     long long result = 1;
     a %= p;
     while (b > 0) {
@@ -21,8 +22,8 @@ vector<pair<long long, long long>> encrypt(const string& message, long long p, l
     vector<pair<long long, long long>> encrypted;
     for (char c : message) {
         long long m = static_cast<long long>(static_cast<unsigned char>(c));
-        long long a = pow_mod(g, k, p);
-        long long b = (pow_mod(y, k, p) * m) % p;
+        long long a = pow_mod1(g, k, p);
+        long long b = (pow_mod1(y, k, p) * m) % p;
         encrypted.emplace_back(a, b);
     }
     return encrypted;
@@ -33,7 +34,7 @@ string decrypt(const vector<pair<long long, long long>>& encrypted, long long p,
     for (const auto& pair : encrypted) {
         long long a = pair.first;
         long long b = pair.second;
-        long long m = (b * pow_mod(a, p-1-x, p)) % p;
+        long long m = (b * pow_mod1(a, p-1-x, p)) % p;
         decrypted += static_cast<char>(m);
     }
     return decrypted;
@@ -75,7 +76,7 @@ string attack(const vector<pair<long long, long long>>& encrypted, long long p, 
         cout << "k не найден.\n";
         return "";
     }
-    long long s = pow_mod(y, k, p);
+    long long s = pow_mod1(y, k, p);
     long long s_inv = mod_inverse(s, p);
     string result;
     for (const auto& pair : encrypted) {
@@ -85,7 +86,7 @@ string attack(const vector<pair<long long, long long>>& encrypted, long long p, 
     return result;
 }
 
-int main() {
+void hacker() {
     long long p, k, g, x;
     cout << "Введите p (простое число): ";
     cin >> p;
@@ -97,7 +98,7 @@ int main() {
     cin >> x;
     cin.ignore();
     
-    long long y = pow_mod(g, x, p);
+    long long y = pow_mod1(g, x, p);
     cout << "Открытый ключ (y): " << y << endl;
     
     string message;
@@ -112,12 +113,12 @@ int main() {
     cout << endl;
     
     string decrypted = decrypt(encrypted, p, x);
-    cout << "Законное расшифрование: " << decrypted << endl;
+    cout << "Расшифрованое сообщение: " << decrypted << endl;
     
     cout << "\nЭмуляция атаки...\n";
     string attacked = attack(encrypted, p, g, y);
     if (!attacked.empty())
         cout << "Результат атаки: " << attacked << endl;
     
-    return 0;
+
 }
