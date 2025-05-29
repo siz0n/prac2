@@ -13,31 +13,13 @@ enum class Option {
     FERMA = 1,
     EXTENDED_EUCLID,
     INVERSE_EUCLID,
-    ELGAMAL, 
+    ELGAMAL, //173099
     CONTINUED_FRACTION,
     ATTACK_SIMULATION,
     EXIT = 0
 };
-
-int main() {
-    int choice;
-    do {
-        cout << "\n1. Реализация a^x mod p через теорему Ферма\n";
-        cout << "2. Алгоритм Евклида для вычисления с*d mod m=1 (через u и v)\n";
-        cout << "3. Алгоритм Евклида для вычисления взаимообратного числа с^-1 mod m=d\n";
-        cout << "4. Шифрование алгоритмом Эль-Гамаля\n";
-        cout << "5. Решение уравнение через цепную дробь\n";
-        cout << "6. Эмуляция атаки\n";
-        cout << "0. Выход\n";
-        cout << "Выберите опцию: ";
-        cin >> choice;
-        
-
-        try {
-            switch(static_cast<Option>(choice)) {
-                case Option::FERMA: {
-                    try {
-                        uint64_t a, x;
+void task1(){
+uint64_t a, x;
                         cout << "Введите с: ";
                         cin >> a;
                         cout << "Введите m: ";
@@ -60,14 +42,9 @@ int main() {
                         } else {
                             cout << "Результаты совпадают!" << endl;
                         }
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
                     }
-                    break;
-                }
-                case Option::EXTENDED_EUCLID: {
-                    try {
-                        int c, m;
+void task2(){
+    int c, m;
                         cout << "Введите число c: ";
                         cin >> c;
                         cout << "Введите число m: ";
@@ -77,14 +54,9 @@ int main() {
                         cout << "u = " << get<1>(result) << ", v = " << get<2>(result) << endl;
                         cout << "Проверка: " << c << " * " << get<1>(result) << " + " << m << " * " << get<2>(result)
                              << " = " << c * get<1>(result) + m * get<2>(result) << endl;
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
-                    }
-                    break;
-                }
-                case Option::INVERSE_EUCLID: {
-                    try {
-                        int c, m;
+}
+void task3(){
+    int c, m;
                         cout << "Введите число c: ";
                         cin >> c;
                         cout << "Введите модуль m: ";
@@ -99,14 +71,10 @@ int main() {
                         int inverse = (u % m + m) % m;
                         cout << "Обратный элемент d = " << inverse << endl;
                         cout << c << "^-1 mod " << m << " = " << inverse << endl;
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
-                    }
-                    break;
-                }
-                case Option::ELGAMAL: {
-                    try {
-                        cout << "Введите значения для генерации открытого ключа" << endl;
+                        
+}
+void task4(){
+    cout << "Введите значения для генерации открытого ключа" << endl;
                         uint64_t p = input_prime("Введите p (должно быть простым): ");
                         
                         uint64_t k = input_xkg("Введите k (случайное число < p): ", p);
@@ -126,14 +94,9 @@ int main() {
                         outputEncryptedMessage(encrypted);
                         string decrypted = decrypt(encrypted, p, x);
                         cout << "\nРасшифрованное сообщение: " << decrypted << endl;
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
-                    }
-                    break;
-                }
-                case Option::CONTINUED_FRACTION: {
-                    try {
-                        uint64_t p, q;
+}
+void task5(){
+    uint64_t p, q;
                         cin >> p;
                         cout << "/" << endl;
                         cin >> q;
@@ -157,14 +120,9 @@ int main() {
                     cout << "a = " << x0 << " + " << (b_coeff / gcd_val) << " * k" << endl;
                     cout << "b = " << y0 << " - " << (a_coeff / gcd_val) << " * k" << endl;
                     cout << "где k — любое целое число." << endl;
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
-                    }
-                    break;
-                }
-                case Option::ATTACK_SIMULATION: {
-                    try {
-                        cout << "Введите значения для генерации открытого ключа" << endl;
+}
+void task6(){
+    cout << "Введите значения для генерации открытого ключа" << endl;
                         uint64_t p = input_prime("Введите p (должно быть простым): ");
                         uint64_t k = input_xkg("Введите k (случайное число < p): ", p);
                         uint64_t g = input_xkg("Введите g (случайное число < p): ", p);
@@ -186,23 +144,4 @@ int main() {
                         string attacked = attack(encrypted, p, g, y);
                         if (!attacked.empty())
                             cout << "Результат атаки: " << attacked << endl;
-                            
-                    } catch (const exception& e) {
-                        cerr << "Ошибка: " << e.what() << endl;
-                    }
-                    break;
-                } 
-                case Option::EXIT:
-                    cout << "Выход из программы...\n";
-                    break;
-                default:
-                    cout << "Неверный выбор. Попробуйте снова.\n";
-            }
-        } catch (...) {
-            cout << "Ошибка ввода" << endl;
-        }
-        sleep(2);
-    } while(choice != 0);
-
-    return 0;
 }
